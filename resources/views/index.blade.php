@@ -4,14 +4,18 @@
 </h1>
 
 @section('content')
-    <ul>
+
 @forelse ($tasks as $task)
-    <li>
-        <a href="{{route('tasks.show', ['task' => $task->id])}}">{{$task->title}}</a>
-    </li>
+
+        <div><a href="{{route('tasks.show', ['task' => $task->id])}}">{{$task->title}}</a></div>
+
     @empty
     <li>There are no tasks!</li>
 
     @endforelse
-    </ul>
+    @if ($tasks->count())
+    {{$tasks->links()}}
+
+    @endif
+
 @endsection
