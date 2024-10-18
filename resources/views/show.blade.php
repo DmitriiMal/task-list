@@ -8,14 +8,37 @@
 <p>{{$task->long_description}}</p>
 @endif
 
+<p>
+    @if($task->completed)
+    Completed
+    @else
+    Not completed
+    @endif
+</p>
+
 <p>{{$task->created_at}}</p>
 <p>{{$task->updated_at}}</p>
 
+
 <div>
-    <form action="{{route('task.destroy', ['task' => $task->id])}}" method="POST">
+    <a href="{{route('tasks.edit', ['task' => $task->id])}}">Edit</a>
+</div>
+
+<div>
+    <form method="POST" action="{{ route('tasks.toggle-complete', ['task' => $task]) }}">
+        @csrf
+        @method('PUT')
+        <button type="submit">
+            Mark as {{$task->completed ? 'not completed' : 'completed'}}
+        </button>
+    </form>
+</div>
+<div>
+    <form action="{{route('tasks.destroy', ['task' => $task->id])}}" method="POST">
         @csrf
         @method('DELETE')
-    <input type="submit" value="Delete">
+    {{-- <input type="submit" value="Delete"> --}}
+    <button type="submit">Delete</button>
     </form>
 </div>
 @endsection
