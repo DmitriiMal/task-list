@@ -21,7 +21,7 @@
 
 
 <div>
-    <a href="{{route('tasks.edit', ['task' => $task->id])}}">Edit</a>
+    <a class="" href="{{route('tasks.edit', ['task' => $task->id])}}">Edit</a>
 </div>
 
 <div>
